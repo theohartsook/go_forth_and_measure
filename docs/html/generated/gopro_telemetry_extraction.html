@@ -15,6 +15,7 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="go_forth_and_measure" href="../modules.html" />
     <link rel="prev" title="API" href="../api.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
@@ -41,37 +42,37 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">applyTags</span></code>(input_dir, imu_csv, gps_csv, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.applyTags" title="gopro_telemetry_extraction.applyTags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">applyTags</span></code></a>(input_dir, imu_csv, gps_csv, ...)</p></td>
 <td><p>Tags a directory of cts labelled frames with their GPS and IMU data using exif_tool.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">buildAndTagFrames</span></code>(input_video, imu_csv, ...)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.buildAndTagFrames" title="gopro_telemetry_extraction.buildAndTagFrames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">buildAndTagFrames</span></code></a>(input_video, imu_csv, ...)</p></td>
 <td><p>Extracts frames from a GoPro video and tags them with GPS and IMU data.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cleanGPS</span></code>(input_gps, output_gps)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.cleanGPS" title="gopro_telemetry_extraction.cleanGPS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cleanGPS</span></code></a>(input_gps, output_gps)</p></td>
 <td><p>Reformats the JS extraction outputs.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cleanIMU</span></code>(input_imu, output_imu)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.cleanIMU" title="gopro_telemetry_extraction.cleanIMU"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cleanIMU</span></code></a>(input_imu, output_imu)</p></td>
 <td><p>Reformats the JS extraction outputs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extractAllFrames</span></code>(input_video, output_dir[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.extractAllFrames" title="gopro_telemetry_extraction.extractAllFrames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extractAllFrames</span></code></a>(input_video, output_dir[, ...])</p></td>
 <td><p>Extracts all frames from a video using ffmpeg.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extractFPS</span></code>(input_video)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.extractFPS" title="gopro_telemetry_extraction.extractFPS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extractFPS</span></code></a>(input_video)</p></td>
 <td><p>Wrapper for ffmpeg to get the true FPS of a video.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">findClosestCTS</span></code>(cts, cts_list)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.findClosestCTS" title="gopro_telemetry_extraction.findClosestCTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findClosestCTS</span></code></a>(cts, cts_list)</p></td>
 <td><p>Uses bisection search to find the nearest neighbor for a CTS.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">labelFramesWithCTS</span></code>(input_dir, output_dir[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.labelFramesWithCTS" title="gopro_telemetry_extraction.labelFramesWithCTS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">labelFramesWithCTS</span></code></a>(input_dir, output_dir[, ...])</p></td>
 <td><p>Labels a directory of frames with their approximate camera time.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodeWrapper</span></code>(input_video, output_imu, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.nodeWrapper" title="gopro_telemetry_extraction.nodeWrapper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nodeWrapper</span></code></a>(input_video, output_imu, ...)</p></td>
 <td><p>Wrapper to call JS script.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveFinalOutputs</span></code>(input_root, output_dir[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.saveFinalOutputs" title="gopro_telemetry_extraction.saveFinalOutputs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveFinalOutputs</span></code></a>(input_root, output_dir[, ...])</p></td>
 <td><p>Saves the fully tagged and labelled frames with unique filenames.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">videosToFrames</span></code>(video_dir, imu_root, ...[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="../gopro_telemetry_extraction.html#gopro_telemetry_extraction.videosToFrames" title="gopro_telemetry_extraction.videosToFrames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">videosToFrames</span></code></a>(video_dir, imu_root, ...[, ...])</p></td>
 <td><p>Converts a directory of GoPro videos and converts them to frames tagged with GPS and IMU.</p></td>
 </tr>
 </tbody>
@@ -101,6 +102,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">gopro_telemetry_extraction</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">go_forth_and_measure</a></li>
 </ul>
 
 <div class="relations">
@@ -109,6 +111,7 @@
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="../api.html">API</a><ul>
       <li>Previous: <a href="../api.html" title="previous chapter">API</a></li>
+      <li>Next: <a href="../modules.html" title="next chapter">go_forth_and_measure</a></li>
   </ul></li>
   </ul></li>
 </ul>
