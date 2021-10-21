@@ -1,7 +1,0 @@
-.DS_Store
-__pycache__
-build.spec
-make.bat
-Makefile
-.gitattributes
-.gitignore
