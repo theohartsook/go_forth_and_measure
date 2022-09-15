@@ -19,12 +19,12 @@ def main():
                         help='Filepath to the config file for exif_tool.')
     parser.add_argument('--final_dir', type=str,
                         help='One directory for all frames')
-    parser.add_argument('--file_ending', type=str,
+    parser.add_argument('--file_ending', type=str, default='.MP4',
                         help='Target ending for the videos')
 
     args = parser.parse_args()
 
-    videosToFrames(args.video_dir, args.imu_root, args.gps_root, args.js_path, args.temp_root, args.output_root, args.final_dir, args.file_ending)
+    videosToFrames(args.video_dir, args.imu_root, args.gps_root, args.js_path, args.temp_root, args.output_root, args.config_file, args.final_dir, args.file_ending)
 
 if __name__ == '__main__':
     main()

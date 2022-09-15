@@ -15,20 +15,30 @@ gpmfExtract(file)
 
             //prints the values, timestamp and count of GPS metadata per point
             var GPS_data = telemetry[1].streams.GPS5.samples;
-            //console.log(GPS_data);
-            //console.log('\nThere are ', GPS_data.length, ' GPS data samples\n');
 
-            //prints the values, timestamp and count of IMU metadata per point (in rad/s)
-            var IMU_data = telemetry[1].streams.GYRO.samples;
-            //console.log(IMU_data.slice(0,3));
+
+            //prints the values, timestamp and count of GYRO metadata per point (in rad/s)
+            var GYRO_data = telemetry[1].streams.GYRO.samples;
             
+            //prints the values, timestamp and count of ACCL metadata per point (in m/s^2)
+            var ACCL_data = telemetry[1].streams.ACCL.samples;
 
+            //prints the values, timestamp and count of MAGN metadata per point (in micro teslas)
+            //var MAGN_data = telemetry[1].streams.MAGN.samples;
             
-            output_IMU = fs.createWriteStream(myArgs[1]);
-            fastcsv.write(IMU_data, {headers: true})
-            .pipe(output_IMU);
+            output_GYRO = fs.createWriteStream(myArgs[1]);
+            fastcsv.write(GYRO_data, {headers: true})
+            .pipe(output_GYRO);
 
-            output_GPS = fs.createWriteStream(myArgs[2]);
+            output_ACCL = fs.createWriteStream(myArgs[2]);
+            fastcsv.write(ACCL_data, {headers: true})
+            .pipe(output_ACCL);
+
+            //output_MAGN = fs.createWriteStream(myArgs[3]);
+            //fastcsv.write(MAGN_data, {headers : true})
+            //.pipe(output_MAGN);
+
+            output_GPS = fs.createWriteStream(myArgs[4]);
             fastcsv.write(GPS_data, {headers: true})
             .pipe(output_GPS);
 
