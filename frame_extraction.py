@@ -86,3 +86,25 @@ def extractAllFrames(input_video, output_dir, prefix='frame_', sig_fig=7, file_e
     frame_extraction_call = ['ffmpeg', '-i', input_video,  output_frames]
     subprocess.call(frame_extraction_call)
     logging.debug('Frame extraction finished.')
+
+def selectNthFrames(input_dir, output_dir, nth=15):
+    """
+    :param input_dir: Filepath to input directory from extractAllFrames
+    :type input_dir: str
+    :param output_dir: Filepath to output directory
+    :type output_dir: str
+    :param nth: Controls how many frames are selected, defaults to 15
+    :type nth: int
+
+    """
+
+    counter = 0
+    for i in sorted(os.listdir(input_dir)):
+        if counter % nth == 0:
+            input_img = input_dir + '/' + i
+            output_img = output_dir + '/' + i
+            shutil.move(input_img, output_img)
+            counter +=1
+        else:
+            counter +=1
+            continue
