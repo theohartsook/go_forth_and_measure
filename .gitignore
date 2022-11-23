@@ -1,4 +1,11 @@
 __pycache__
 .DS_Store
-build
-
+_build
+make.bat
+Makefile
+index.rst
+conf.py
+_static
+_templates
+package_lock.json
+node_modules
