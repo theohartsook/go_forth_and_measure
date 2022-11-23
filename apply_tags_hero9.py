@@ -33,7 +33,7 @@ def findClosestCTS(cts, cts_list):
         logging.debug('Found CTS %s', before)
         return before
 
-def applyTags(input_dir, gps_csv, gyro_csv=None, for_P4D=False, fps=30, file_ending='.jpg', west_hem=True, config_file=None):
+def applyTags(input_dir, gps_csv=None, gyro_csv=None, for_P4D=False, fps=30, file_ending='.jpg', west_hem=True, config_file=None):
     """ Tags a directory of cts labelled frames with their GPS and GYRO data using exif_tool.
 
     :param input_dir: Filepath to the directory of labelled frames.
@@ -54,8 +54,8 @@ def applyTags(input_dir, gps_csv, gyro_csv=None, for_P4D=False, fps=30, file_end
     :type for_P4D: bool
     """
 
-
-    gps_df = pd.read_csv(gps_csv)
+    if gps_csv is not None:
+        gps_df = pd.read_csv(gps_csv)
     if gyro_csv is not None:
         gyro_df = pd.read_csv(gyro_csv)
 
@@ -67,17 +67,18 @@ def applyTags(input_dir, gps_csv, gyro_csv=None, for_P4D=False, fps=30, file_end
         info = i.split('_')
         cts = info[-1]
         cts = float(cts[:-4])/fps*1000
-        
-        gps_cts = sorted(gps_df['cts'])
-        closest_gps = findClosestCTS(cts, gps_cts)
-        gps_row = gps_df.loc[gps_df['cts'] == closest_gps]
-        lat = gps_row['lat'].iloc[0]
-        lon = gps_row['lon'].iloc[0]
-        elev = gps_row['elev'].iloc[0]
-        logging.debug('Found telemetry tags')
-        tagging_call = ['exiftool', '-GPSLatitude ='+str(lat), '-GPSLongitude ='+str(lon), '-GPSAltitude ='+str(elev), '-overwrite_original', frame]
-        if west_hem == True:
-            tagging_call.append('-GPSLongitudeRef=West')
+        tagging_call = ['exiftool']
+        if gps_csv is not None:
+            gps_cts = sorted(gps_df['cts'])
+            closest_gps = findClosestCTS(cts, gps_cts)
+            gps_row = gps_df.loc[gps_df['cts'] == closest_gps]
+            lat = gps_row['lat'].iloc[0]
+            lon = gps_row['lon'].iloc[0]
+            elev = gps_row['elev'].iloc[0]
+            logging.debug('Found telemetry tags')
+            tagging_call.extend(['-GPSLatitude ='+str(lat), '-GPSLongitude ='+str(lon), '-GPSAltitude ='+str(elev)])
+            if west_hem == True:
+                tagging_call.append('-GPSLongitudeRef=West')    
         if gyro_csv is not None:
             gyro_cts = sorted(gyro_df['cts'])
             closest_gyro = findClosestCTS(cts, gyro_cts)
@@ -90,6 +91,9 @@ def applyTags(input_dir, gps_csv, gyro_csv=None, for_P4D=False, fps=30, file_end
                 rY = gyro_row['rY'].iloc[0]
                 rX = gyro_row['rX'].iloc[0]
                 rZ = gyro_row['rZ'].iloc[0]
-            tagging_call = ['exiftool', '-config', config_file, '-GPSLatitude ='+str(lat), '-GPSLongitude ='+str(lon), '-GPSAltitude ='+str(elev), '-Pitch ='+str(rY), '-Roll ='+str(rX), '-Yaw ='+str(rZ), '-overwrite_original', frame]
+            tagging_call.insert(1, '-config')
+            tagging_call.insert(2, config_file)
+            tagging_call.extend(['-Pitch ='+str(rY), '-Roll ='+str(rX), '-Yaw ='+str(rZ)])
+        tagging_call.extend(['-overwrite_original', frame])
         subprocess.run(tagging_call)
 

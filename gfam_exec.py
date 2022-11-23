@@ -1,23 +1,32 @@
-import os
+import os, json
 
 from frame_extraction import extractAllFrames, selectNthFrames
 from telemetry_cleaning_hero9 import cleanHERO9, nodeWrapperHERO9
 from apply_tags_hero9 import applyTags
 
-#####
-# Enter your values here!
-#####
+with open('/Users/theo/Desktop/sample.json') as json_file:
+    data = json.load(json_file)
+input_vid = data['input_vid']
+project_dir = data['project_dir']
+nth_frame = data['nth_frame']
+js_path = data['js_path']
+rescale_z = data['rescale_z']
+min_z = data['min_z']
+max_z = data['max_z']
+sfm = data['sfm']
+config_file = data['config_file']
 
-input_vid = '/Users/theo/Pictures/quad_telem_test/GH011541.MP4'
-project_dir = '/Users/theo/Desktop/cool_beans'
-nth_frame = 30
-js_path = '/Users/theo/Documents/GitHub/go_forth_and_measure/supplementary_files/telemetry_extraction_hero9.js'
-flatten_z = True
-sfm = 'P4D'
-config_file = '/Users/theo/Documents/GitHub/go_forth_and_measure/supplementary_files/pix4d.config'
-
-#####
-
+settings = {'input_vid':input_vid,
+            'project_dir':project_dir,
+            'nth_frame':nth_frame,
+            'js_path':js_path,
+            'rescale_z':rescale_z,
+            'min_z':min_z,
+            'max_z':max_z,
+            'sfm':sfm,
+            'config_file':config_file}
+json_object = json.dumps(settings, indent=4)
+ 
 if os.path.exists(project_dir):
     print('project already exists')
 else:
@@ -45,8 +54,10 @@ nodeWrapperHERO9(input_vid,
                     telem_dir + '/IORI.csv',
                     js_path)
 
+cleanHERO9(telem_dir, rescale_z=rescale_z, min_z=min_z, max_z=max_z)
 
-cleanHERO9(telem_dir, flatten_z=flatten_z)
+subsample_dir = project_dir + '/subsample_' + str(nth_frame) + '_frames'
+telem_dir = project_dir + '/telem'
 
 if sfm == 'P4D':
     applyTags(subsample_dir,

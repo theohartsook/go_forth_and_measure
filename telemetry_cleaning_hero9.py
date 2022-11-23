@@ -26,7 +26,7 @@ def nodeWrapperHERO9(input_video, output_gps, output_accl, output_gyro, output_g
     subprocess.run(extract_telemetry)
 
 
-def smoothGPS(input_gps, window_sec=3, sample_hz=20, flatten_z = False):
+def smoothGPS(input_gps, window_sec=3, sample_hz=20, rescale_z = False, min_z=None, max_z=None):
     """  Uses a moving average to filter the input GPS.
 
     :param gps_csv: Filepath to the GPS output from cleanGPS()
@@ -34,8 +34,12 @@ def smoothGPS(input_gps, window_sec=3, sample_hz=20, flatten_z = False):
     :param window_sec: The length of the moving window in seconds, defaults to 3 seconds.
     :type window_sec: int
     :param sample_hz: The sampling frequency of the GPS in Hz, defaults to 20 Hz.
-    :param flatten_z: Scales the z axis between mean+1 and mean-1, set to true when the Z is very noisy. Defaults to False.
-    :type flatten_z: bool
+    :param rescale_z: Scales the z axis using min_z and max_z arguments, or +/- 1 around the mean. Defaults to False.
+    :type rescale_z: bool
+    :param min_z: The lowest known elevation in the plot, used for rescaling. Defaults to None.
+    :type min_z: float
+    :param max_z: The highest known elevation in the plot, used for rescaling. Defaults to None.
+    :type max_z: float
     """
 
     gps_df = pd.read_csv(input_gps)
@@ -44,8 +48,18 @@ def smoothGPS(input_gps, window_sec=3, sample_hz=20, flatten_z = False):
     gps_df['lat'] = gps_df['lat'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
     gps_df['lon'] = gps_df['lon'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
     gps_df['elev'] = gps_df['elev'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-    if flatten_z == True:
-        gps_df['elev'] = gps_df['elev'].mean() + (gps_df['elev']/gps_df['elev'].max())
+    if rescale_z == True:
+        z_min = gps_df['elev'].min()
+        z_max = gps_df['elev'].max()
+        if min_z is None:
+            a = gps_df['elev'].mean() - 1
+        else:
+            a = min_z
+        if max_z is None:
+            b = gps_df['elev'].mean() + 1
+        else:
+            b = z_max
+        gps_df['elev'] = ((b-a)*(gps_df['elev']-z_min)/(z_max-z_min) + a)
 
     gps_df.to_csv(input_gps, index=False)
 
@@ -194,12 +208,12 @@ def cleanGRAV(grav_csv):
     grav_out.to_csv(grav_csv, index=False)
     logging.debug('GRAV stream cleaned.')
 
-def cleanHERO9(telem_dir, flatten_z = False):
+def cleanHERO9(telem_dir, rescale_z = False, min_z=None, max_z=None):
     for i in sorted(os.listdir(telem_dir)):
         input = telem_dir + '/' + i
         if i.endswith('GPS.csv'):
             cleanGPS(input)
-            #smoothGPS(input, flatten_z=flatten_z)
+            smoothGPS(input, rescale_z=rescale_z, min_z=min_z, max_z=max_z)
         elif i.endswith('ACCL.csv'):
             cleanACCL(input)
             smoothACCL(input)
