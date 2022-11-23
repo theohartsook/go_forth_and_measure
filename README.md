@@ -1,4 +1,4 @@
-This is some code that turns GoPro videos into images with the appropriate tags for geolocation and orientation. You can run it by supplying a .JSON modified from this template: \\
+This is some code that turns GoPro videos into images with the appropriate tags for geolocation and orientation. You can run it by supplying a .JSON modified from this template: \
 ```
 {
     "input_vid": "/path/to/gopro.MP4",
@@ -12,5 +12,5 @@ This is some code that turns GoPro videos into images with the appropriate tags 
     "config_file": "path/to/go_forth_and_measure/supplementary_files/pix4d.config"
 }
 ```
-\\
+\
 Currently only the Hero 9 camera is supported for metadata extraction.
