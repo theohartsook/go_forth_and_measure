@@ -26,7 +26,7 @@ def nodeWrapperHERO9(input_video, output_gps, output_accl, output_gyro, output_g
     subprocess.run(extract_telemetry)
 
 
-def smoothGPS(input_gps, window_sec=3, sample_hz=20, rescale_z = False, min_z=None, max_z=None):
+def smoothGPS(input_gps, window_sec=3, sample_hz=20, rescale_z=False, min_z=None, max_z=None):
     """  Uses a moving average to filter the input GPS.
 
     :param gps_csv: Filepath to the GPS output from cleanGPS()
@@ -44,10 +44,8 @@ def smoothGPS(input_gps, window_sec=3, sample_hz=20, rescale_z = False, min_z=No
 
     gps_df = pd.read_csv(input_gps)
 
-
     gps_df['lat'] = gps_df['lat'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
     gps_df['lon'] = gps_df['lon'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-    gps_df['elev'] = gps_df['elev'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
     if rescale_z == True:
         z_min = gps_df['elev'].min()
         z_max = gps_df['elev'].max()
@@ -58,8 +56,11 @@ def smoothGPS(input_gps, window_sec=3, sample_hz=20, rescale_z = False, min_z=No
         if max_z is None:
             b = gps_df['elev'].mean() + 1
         else:
-            b = z_max
+            b = max_z
+        print(a,b)
         gps_df['elev'] = ((b-a)*(gps_df['elev']-z_min)/(z_max-z_min) + a)
+    else:
+        gps_df['elev'] = gps_df['elev'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
 
     gps_df.to_csv(input_gps, index=False)
 
@@ -208,7 +209,7 @@ def cleanGRAV(grav_csv):
     grav_out.to_csv(grav_csv, index=False)
     logging.debug('GRAV stream cleaned.')
 
-def cleanHERO9(telem_dir, rescale_z = False, min_z=None, max_z=None):
+def cleanHERO9(telem_dir, rescale_z=False, min_z=None, max_z=None):
     for i in sorted(os.listdir(telem_dir)):
         input = telem_dir + '/' + i
         if i.endswith('GPS.csv'):
@@ -224,7 +225,6 @@ def cleanHERO9(telem_dir, rescale_z = False, min_z=None, max_z=None):
         elif i.endswith('IORI.csv'):
             cleanIORI(input)
         elif i.endswith('GRAV.csv'):
-            cleanGRAV(input)
+            cleanGRAV(input) 
         else:
             continue
-

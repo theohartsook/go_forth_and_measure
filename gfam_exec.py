@@ -18,6 +18,7 @@ if __name__ == "__main__":
     rescale_z = data['rescale_z']
     min_z = data['min_z']
     max_z = data['max_z']
+    imu = data['imu']
     sfm = data['sfm']
     config_file = data['config_file']
 
@@ -28,6 +29,7 @@ if __name__ == "__main__":
                 'rescale_z':rescale_z,
                 'min_z':min_z,
                 'max_z':max_z,
+                'imu':imu,
                 'sfm':sfm,
                 'config_file':config_file}
     json_object = json.dumps(settings, indent=4)
@@ -58,15 +60,18 @@ if __name__ == "__main__":
                         telem_dir + '/CORI.csv',
                         telem_dir + '/IORI.csv',
                         js_path)
-
+ 
     cleanHERO9(telem_dir, rescale_z=rescale_z, min_z=min_z, max_z=max_z)
 
-    subsample_dir = project_dir + '/subsample_' + str(nth_frame) + '_frames'
-    telem_dir = project_dir + '/telem'
+    if imu is True:
+        gyro_csv = telem_dir + '/GYRO.csv'
+        
+    else:
+        gyro_csv = None
 
     if sfm == 'P4D':
         applyTags(subsample_dir,
-                    gps_csv = telem_dir + '/GPS.csv', 
-                    gyro_csv = telem_dir + '/GYRO.csv',
-                    for_P4D=True,
-                    config_file=config_file)
+                  gps_csv = telem_dir + '/GPS.csv',
+                  gyro_csv = gyro_csv,
+                  for_P4D=True,
+                  config_file=config_file)
