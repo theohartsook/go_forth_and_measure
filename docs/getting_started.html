@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example &mdash; Go forth and measure 0.1 documentation</title>
+  <title>Getting started &mdash; Go forth and measure 1.1.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="api" href="modules.html" />
-    <link rel="prev" title="api package" href="api.html" /> 
+    <link rel="prev" title="Introduction" href="intro.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,8 +42,13 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api.html">api package</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#installation">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#json-configuration">JSON configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-gfam">Running GFAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-outputs">The outputs</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">api</a></li>
 </ul>
 
@@ -61,9 +66,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">Example</li>
+      <li class="breadcrumb-item active">Getting started</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/example.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -71,8 +76,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="example">
-<h1>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h1>
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<section id="json-configuration">
+<h2>JSON configuration<a class="headerlink" href="#json-configuration" title="Permalink to this heading"></a></h2>
 <p>In order to use GFAM, you must record a video using a GoPro camera that contains a GPS, such as Bones or HERO12. After recording your video
 configure a JSON file using this template:</p>
 <div class="highlight-JSON notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">{</span>
@@ -95,8 +102,6 @@ so a 1 minute video would produce 360 images.</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\text{video length} \times \left(\frac{\text{frames per second}}{nth frame} \right) = \text{number of output images}\]</div>
-<div class="math notranslate nohighlight">
-\[60 \, \text{seconds} \times \left( \frac{30 \, \text{frames/second}}{5} \right) = 360\]</div>
 <ul class="simple">
 <li><p>feel free to modify the .js script in supplementary_files to extract additional metadata. I suspect that this script will work for
 additional camera models, but I don’t have them to test. You can check your camera and available metadata on the <a class="reference external" href="https://github.com/gopro/gpmf-parser">gpfm-parser repository</a>.</p></li>
@@ -105,12 +110,29 @@ The GPS time is used to provide the write timestamp on each frame (ignoring time
 <li><p>Exiftool uses this config_file to apply the metadata. If you use a different structure from motion software you may need to modify this.</p></li>
 </ul>
 </section>
+<section id="running-gfam">
+<h2>Running GFAM<a class="headerlink" href="#running-gfam" title="Permalink to this heading"></a></h2>
+<p>Once you’ve created your JSON configuration file, it’s as simple as:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gfam_exec.py<span class="w"> </span>-i<span class="w"> </span>settings.json
+</pre></div>
+</div>
+<p>GFAM is quite aggressive when it comes to error handling in the settings file and setting up the project. After that, it should
+be able to run safely given there are no issues with Exiftool or FFmpeg.</p>
+</section>
+<section id="the-outputs">
+<h2>The outputs<a class="headerlink" href="#the-outputs" title="Permalink to this heading"></a></h2>
+<p>GFAM creates two directories within the specified output. The first is a frame directory that contains the extracted images and their
+metadata. These are ready to be used in structure from motion software. The second is a telemetry directory that contains all the telemetry
+streams extracted from the GoPro. Only GPS and image orientation (IORI) are used to tag the frames, but the rest are included in case
+you would like to utilize them.</p>
+</section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="api.html" class="btn btn-neutral float-left" title="api package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="modules.html" class="btn btn-neutral float-right" title="api" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
