@@ -1,0 +1,31 @@
+================
+Introduction
+================
+
+Hi, welcome to the GFAM documentation!
+
+------------
+Installation
+------------
+
+There are several dependencies that must first be installed.
+
+Python
+======
+* numpy
+* pandas
+
+Javascript
+==========
+* fast-csv
+* fs
+* gpfm-extract
+* gopro-telemetry
+
+
+FFMpeg
+======
+
+
+Exiftool
+========

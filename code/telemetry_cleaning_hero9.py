@@ -213,11 +213,13 @@ def cleanHERO9(telem_dir, rescale_z=False, min_z=None, max_z=None):
     for i in sorted(os.listdir(telem_dir)):
         input = telem_dir + '/' + i
         if i.endswith('GPS.csv'):
+            print('\n\n Cleaning GPS allegedely happens here')
             cleanGPS(input)
-            smoothGPS(input, rescale_z=rescale_z, min_z=min_z, max_z=max_z)
+            print('\n\n Cleaning GPS allegedely finished')
+            #smoothGPS(input, rescale_z=rescale_z, min_z=min_z, max_z=max_z)
         elif i.endswith('ACCL.csv'):
             cleanACCL(input)
-            smoothACCL(input)
+            #smoothACCL(input)
         elif i.endswith('GYRO.csv'):
             cleanGYRO(input)
         elif i.endswith('CORI.csv'):

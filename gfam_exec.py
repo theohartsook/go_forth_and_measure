@@ -20,6 +20,7 @@ if __name__ == "__main__":
     max_z = data['max_z']
     imu = data['imu']
     sfm = data['sfm']
+    prefix = data['prefix']
     config_file = data['config_file']
 
     settings = {'input_vid':input_vid,
@@ -31,6 +32,7 @@ if __name__ == "__main__":
                 'max_z':max_z,
                 'imu':imu,
                 'sfm':sfm,
+                'prefix': prefix,
                 'config_file':config_file}
     json_object = json.dumps(settings, indent=4)
     
@@ -42,7 +44,7 @@ if __name__ == "__main__":
     frame_dir = project_dir +'/frames'
     os.mkdir(frame_dir)
 
-    extractAllFrames(input_vid, frame_dir)
+    extractAllFrames(input_vid, frame_dir, prefix=prefix)
 
     subsample_dir = project_dir + '/subsample_' + str(nth_frame) + '_frames'
     os.mkdir(subsample_dir)
