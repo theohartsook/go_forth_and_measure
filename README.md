@@ -1,4 +1,4 @@
-This is some code that turns GoPro videos into images with the appropriate tags for geolocation and orientation. You can run it by supplying a .JSON modified from this template: \
+This is some code that turns GoPro videos into images with the appropriate tags for geolocation and orientation. You can run it by supplying a .JSON modified from this template: 
 ```
 {
     "input_vid":"/path/to/video",
