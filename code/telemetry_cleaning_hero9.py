@@ -1,40 +1,36 @@
 import logging, os, subprocess
 import pandas as pd
 
-def nodeWrapperHERO9(input_video, output_gps, output_accl, output_gyro, output_grav, output_cori, output_iori, js_path):
-    """ Wrapper to call JS script. 
+def nodeWrapperHERO9(input_video, output_gps=None, output_accl=None, output_gyro=None,
+                       output_grav=None, output_iori=None, js_path=None):
+    """Wrapper to call the JS script.
 
-    :param input_video: Filepath to the target video
-    :type input_video: str
-    :param output_gps: Filepath where GPS stream will be saved.
-    :type output_gps: str
-    :param output_accl: Filepath where ACCL stream will be saved.
-    :type output_accl: str
-    :param output_gyro: Filepath where GYRO stream will be saved.
-    :type output_gyro: str
-    :param output_grav: Filepath where GRAV stream will be saved.
-    :type output_grav: str
-    :param output_cori: Filepath where CORI stream will be saved.
-    :type output_cori: str
-    :param output_iori: Filepath where IORI stream will be saved.
-    :type output_iori: str
+    :param input_video: Filepath to the target video.
+    :param output_gps: Filepath where GPS stream will be saved. Defaults to None.
+    :param output_accl: Filepath where ACCL stream will be saved. Defaults to None.
+    :param output_gyro: Filepath where GYRO stream will be saved. Defaults to None.
+    :param output_grav: Filepath where GRAV stream will be saved. Defaults to None.
+    :param output_iori: Filepath where IORI stream will be saved. Defaults to None.
     :param js_path: Filepath to the JS script.
-    :type js_path: str
     """
-
-    extract_telemetry = ['node', js_path, input_video, output_gps, output_accl, output_gyro, output_grav, output_cori, output_iori]
+    # If an output argument is None, substitute with an empty string.
+    extract_telemetry = [
+        'node', js_path, input_video,
+        output_gps or '',
+        output_accl or '',
+        output_gyro or '',
+        output_grav or '',
+        output_iori or ''
+    ]
     subprocess.run(extract_telemetry)
 
 
-def smoothGPS(input_gps, window_sec=3, sample_hz=20, rescale_z=False, min_z=None, max_z=None):
-    """  Uses a moving average to filter the input GPS.
+def cleanGPS(gps_csv, rescale_z=False, min_z=None, max_z=None):
+    """ Reformats the JS extraction outputs.
 
-    :param gps_csv: Filepath to the GPS output from cleanGPS()
+    :param gps_csv: Filepath to the GPS output from nodeWrapper().
     :type input_gps: str
-    :param window_sec: The length of the moving window in seconds, defaults to 3 seconds.
-    :type window_sec: int
-    :param sample_hz: The sampling frequency of the GPS in Hz, defaults to 20 Hz.
-    :param rescale_z: Scales the z axis using min_z and max_z arguments, or +/- 1 around the mean. Defaults to False.
+    :param rescale_z: Scales the z axis using min_z and max_z arguments, or to the mean. Defaults to False.
     :type rescale_z: bool
     :param min_z: The lowest known elevation in the plot, used for rescaling. Defaults to None.
     :type min_z: float
@@ -42,70 +38,38 @@ def smoothGPS(input_gps, window_sec=3, sample_hz=20, rescale_z=False, min_z=None
     :type max_z: float
     """
 
-    gps_df = pd.read_csv(input_gps)
-
-    gps_df['lat'] = gps_df['lat'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-    gps_df['lon'] = gps_df['lon'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-    if rescale_z == True:
-        z_min = gps_df['elev'].min()
-        z_max = gps_df['elev'].max()
-        if min_z is None:
-            a = gps_df['elev'].mean() - 1
-        else:
-            a = min_z
-        if max_z is None:
-            b = gps_df['elev'].mean() + 1
-        else:
-            b = max_z
-        print(a,b)
-        gps_df['elev'] = ((b-a)*(gps_df['elev']-z_min)/(z_max-z_min) + a)
-    else:
-        gps_df['elev'] = gps_df['elev'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-
-    gps_df.to_csv(input_gps, index=False)
-
-def cleanGPS(gps_csv):
-    """ Reformats the JS extraction outputs.
-
-    :param gps_csv: Filepath to the GPS output from nodeWrapper()
-    :type input_gps: str
-    """
-
     gps_in = pd.read_csv(gps_csv)
-    gps_in['lat'] = 0
-    gps_in['lon'] = 0
-    gps_in['elev'] = 0
-
+    gps_in['lat'] = 0.0
+    gps_in['lon'] = 0.0
+    gps_in['elev'] = 0.0
     for index, row in gps_in.iterrows():
         info = row['value'].split(',')
-        gps_in.loc[index, 'lat'] = info[0]
-        gps_in.loc[index, 'lon'] = info[1]
-        gps_in.loc[index, 'elev'] = info[2]
-    gps_out = gps_in.drop('value', 1)
+        gps_in.loc[index, 'lat'] = float(info[0])
+        gps_in.loc[index, 'lon'] = float(info[1])
+        gps_in.loc[index, 'elev'] = float(info[2])
+    gps_out = gps_in.drop(columns='value')
+    logging.debug("GPS stream cleaned.")
+    if rescale_z == True:
+        z_min = gps_out['elev'].min()
+        z_max = gps_out['elev'].max()
+        if min_z is not None and max_z is not None:
+            if z_min == z_max:
+                gps_out['elev'] = z_min
+                logging.warning("GPS values are all the same, the GPS telemetry on this video is probably not good.")
+            else:
+                a = min_z
+                b = max_z
+                logging.info(f"Rescaling z values between {a} and {b}.")
+                gps_out['elev'] = (((b-a)*(gps_out['elev']-z_min))/(z_max-z_min)) + a
+        else:
+            gps_out['elev'].mean()
     gps_out.to_csv(gps_csv, index=False)
-    logging.debug('GPS data cleaned.')
-
-def smoothACCL(accl_csv, window_sec=3, sample_hz=200):
-    """  Uses a moving average to filter the input ACCL.
-
-    :param accl_csv: Filepath to the ACCL output from cleanACCL()
-    :type input_accl: str
-    :param window_sec: The length of the moving window in seconds, defaults to 3 seconds.
-    :type window_sec: int
-    :param sample_hz: The sampling frequency of the IMU in Hz, defaults to 200 Hz.
-    """
-
-    accl_df = pd.read_csv(accl_csv)
-
-    accl_df['AX'] = accl_df['AX'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-    accl_df['AY'] = accl_df['AY'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-    accl_df['AZ'] = accl_df['AZ'].rolling(window=window_sec*sample_hz, min_periods=1).mean()
-    accl_df.to_csv(accl_csv, index=False)
+    logging.debug("GPS data cleaned.")
 
 def cleanACCL(accl_csv):
     """ Reformats the JS extraction outputs. 
 
-    :param accl_csv: Filepath to the ACCL output from nodeWrapper()
+    :param accl_csv: Filepath to the ACCL output from nodeWrapper().
     :type accl_csv: str
     """
 
@@ -118,14 +82,14 @@ def cleanACCL(accl_csv):
         accl_in.loc[index, 'AY'] = info[0]
         accl_in.loc[index, 'AX'] = info[1]
         accl_in.loc[index, 'AZ'] = info[2]
-    accl_out = accl_in.drop('value', 1)
+    accl_out = accl_in.drop(columns='value')
     accl_out.to_csv(accl_csv, index=False)
     logging.debug('ACCL stream cleaned.')
 
 def cleanGYRO(gyro_csv):
     """ Reformats the JS extraction outputs.
 
-    :param gyro_csv: Filepath to the GYRO output from nodeWrapper()
+    :param gyro_csv: Filepath to the GYRO output from nodeWrapper().
     :type gyro_csv: str
     """
 
@@ -139,37 +103,14 @@ def cleanGYRO(gyro_csv):
         gyro_in.loc[index, 'rY'] = info[0]
         gyro_in.loc[index, 'rX'] = info[1]
         gyro_in.loc[index, 'rZ'] = info[2]
-    gyro_out = gyro_in.drop('value', 1)
+    gyro_out = gyro_in.drop(columns='value')
     gyro_out.to_csv(gyro_csv, index=False)
-    logging.debug('GYRO stream cleaned.')
-
-def cleanCORI(cori_csv):
-    """ Reformats the JS extraction outputs.
-
-    :param cori_csv: Filepath to the CORI output from nodeWrapper()
-    :type cori_csv: str
-    """
-    
-    cori_in = pd.read_csv(cori_csv)
-    
-    cori_in['w'] = 0
-    cori_in['x'] = 0
-    cori_in['y'] = 0
-    cori_in['z'] = 0
-    for index, row in cori_in.iterrows():
-        info = row['value'].split(',')
-        cori_in.loc[index, 'w'] = info[0]
-        cori_in.loc[index, 'x'] = info[1]
-        cori_in.loc[index, 'y'] = info[2]
-        cori_in.loc[index, 'z'] = info[3]
-    cori_out = cori_in.drop('value', 1)
-    cori_out.to_csv(cori_csv, index=False)
-    logging.debug('CORI stream cleaned.')
+    logging.debug("GYRO stream cleaned.")
 
 def cleanIORI(iori_csv):
     """ Reformats the JS extraction outputs.
 
-    :param iori_csv: Filepath to the IORI output from nodeWrapper()
+    :param iori_csv: Filepath to the IORI output from nodeWrapper()/
     :type iori_csv: str
     """
     
@@ -185,14 +126,14 @@ def cleanIORI(iori_csv):
         iori_in.loc[index, 'x'] = info[1]
         iori_in.loc[index, 'y'] = info[2]
         iori_in.loc[index, 'z'] = info[3]
-    iori_out = iori_in.drop('value', 1)
+    iori_out = iori_in.drop(columns='value')
     iori_out.to_csv(iori_csv, index=False)
-    logging.debug('IORI stream cleaned.')
+    logging.debug("IORI stream cleaned.")
 
 def cleanGRAV(grav_csv):
     """ Reformats the JS extraction outputs.
 
-    :param grav_csv: Filpath to the GRAV output from nodeWrapper()
+    :param grav_csv: Filpath to the GRAV output from nodeWrapper().
     :type grav_csv: str
     """
     grav_in = pd.read_csv(grav_csv)
@@ -203,27 +144,32 @@ def cleanGRAV(grav_csv):
     for index, row in grav_in.iterrows():
         info = row['value'].split(',')
         grav_in.loc[index, 'y'] = info[0]
-        grav_in.loc[index, 'x'] = info[1]
+        grav_in.loc[index, 'x'] = info[1]*-1
         grav_in.loc[index, 'z'] = info[2]
-    grav_out = grav_in.drop('value', 1)
+    grav_out = grav_in.drop(columns='value')
     grav_out.to_csv(grav_csv, index=False)
-    logging.debug('GRAV stream cleaned.')
+    logging.debug("GRAV stream cleaned.")
 
 def cleanHERO9(telem_dir, rescale_z=False, min_z=None, max_z=None):
+    """ Wrapper function for cleaning HERO9 camera telemetry.
+
+    :param telem_dir: Filepath to telemetry directory
+    :type telem_dir: str
+    :param rescale_z: Scales the z axis using min_z and max_z arguments, or to the mean. Defaults to False.
+    :type rescale_z: bool
+    :param min_z: The lowest known elevation in the plot, used for rescaling. Defaults to None.
+    :type min_z: float
+    :param max_z: The highest known elevation in the plot, used for rescaling. Defaults to None.
+    :type max_z: float
+    """
     for i in sorted(os.listdir(telem_dir)):
-        input = telem_dir + '/' + i
+        input = os.path.join(telem_dir, i)
         if i.endswith('GPS.csv'):
-            print('\n\n Cleaning GPS allegedely happens here')
-            cleanGPS(input)
-            print('\n\n Cleaning GPS allegedely finished')
-            #smoothGPS(input, rescale_z=rescale_z, min_z=min_z, max_z=max_z)
+            cleanGPS(input, rescale_z=rescale_z, min_z=min_z, max_z=max_z)
         elif i.endswith('ACCL.csv'):
             cleanACCL(input)
-            #smoothACCL(input)
         elif i.endswith('GYRO.csv'):
             cleanGYRO(input)
-        elif i.endswith('CORI.csv'):
-            cleanCORI(input)
         elif i.endswith('IORI.csv'):
             cleanIORI(input)
         elif i.endswith('GRAV.csv'):

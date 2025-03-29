@@ -3,27 +3,28 @@ import logging, os, shutil, subprocess
 def timeStampFrames(input_video, frame_dir, output_dir):
     """ Tags frames with their CTS timestamp (used for telemetry matching).
     
-    :param input_video: Filepath to the target video
+    :param input_video: Filepath to the target video.
     :type input_video: str
     :param frame_dir: Filepath to the directory where frames are stored.
     :type frame_dir: str
     :param output_dir: Filepath to the directory where the timestamped frames will be stored.
     :type output_dir: str
     """
+
     fps = extractFPS(input_video)
 
     labelFramesWithCTS(frame_dir, output_dir, fps=fps)
 
-def labelFramesWithCTS(input_dir, output_dir, fps=60, file_ending='.jpg'):
+def labelFramesWithCTS(input_dir, output_dir, fps=30, file_ending='.jpg'):
     """ Labels a directory of frames with their approximate camera time.
 
     :param input_dir: Filepath to the directory of frames.
     :type input_video: str
     :param output_dir: Filepath to the directory where the labelled frames will be stored.
     :type output_dir: str
-    :param fps: FPS of the original video.
+    :param fps: FPS of the original video. Defaults to 30.
     :type fps: int
-    :param file_ending: Target ending for the frames, defaults to '.jpg'
+    :param file_ending: Target ending for the frames. Defaults to '.jpg'
     :type file_ending: str
     """
 
@@ -62,38 +63,38 @@ def extractFPS(input_video):
     info = info.strip()
     info = info.split('/')
     fps = int(info[0])/int(info[1])
-    logging.debug('FPS: %s', fps)
+    logging.debug(f"FPS: {fps}")
 
     return fps
 
 def extractAllFrames(input_video, output_dir, prefix='frame_', sig_fig=7, file_ending='.jpg'):
     """ Extracts all frames from a video using ffmpeg. 
 
-    :param input_video: Filepath to the target video
+    :param input_video: Filepath to the target video.
     :type input_video: str
     :param output_dir: Filepath to the directory where the tagged frames will be stored.
     :type output_dir: str
-    :param prefix: Prefix for the extracted frames, defaults to 'frame_'
+    :param prefix: Prefix for the extracted frames. Defaults to 'frame_'.
     :type prefix: str
-    :param sig_fig: Controls the length of the frame IDs, defaults to 7 (i.e. 0000001-9999999)
+    :param sig_fig: Controls the length of the frame IDs. Defaults to 7 (i.e. 0000001-9999999)
     :type sig_fig: int
-    :param file_ending: Sets the frame output format, defaults to '.jpg'
+    :param file_ending: Sets the frame output format. Defaults to '.jpg'
     :type file_ending: str
     """
 
-    logging.debug('Frame extraction starts')
+    logging.debug("Frame extraction starts.")
     output_frames = output_dir + '/' + prefix + '%' + str(sig_fig) + 'd' + file_ending
-    frame_extraction_call = ['ffmpeg', '-i', input_video,  output_frames]
+    frame_extraction_call = ['ffmpeg', '-i', input_video,  output_frames, '-loglevel', 'error']
     subprocess.call(frame_extraction_call)
-    logging.debug('Frame extraction finished.')
+    logging.debug("Frame extraction finished.")
 
 def selectNthFrames(input_dir, output_dir, nth=15):
     """
-    :param input_dir: Filepath to input directory from extractAllFrames
+    :param input_dir: Filepath to input directory from extractAllFrames().
     :type input_dir: str
-    :param output_dir: Filepath to output directory
+    :param output_dir: Filepath to output directory.
     :type output_dir: str
-    :param nth: Controls how many frames are selected, defaults to 15
+    :param nth: Controls how many frames are selected. Defaults to 15
     :type nth: int
 
     """
