@@ -233,40 +233,79 @@
 
 
 
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</p>
 <h1 id="go-forth-and-measure">Go Forth and Measure</h1>
 <p>Welcome to the Go Forth and Measure documentation!</p>
 <h1 id="see-api-reference-for-detailed-descriptions-of-each-module">See <a href="api/">API Reference</a> for detailed descriptions of each module.</h1>
-<h1 id="welcome-to-mkdocs">Welcome to MkDocs</h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+<h1 id="introduction">Introduction</h1>
+<p>This is some code that turns GoPro videos into images with the appropriate tags for structure from motion software.</p>
+<h1 id="installation">Installation</h1>
+<p>Python, Javascript, ExifTool, and FFmpeg are required.</p>
+<h2 id="python">Python</h2>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li>numpy</li>
+<li>pandas</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<h2 id="javascript">Javascript</h2>
+<ul>
+<li>gopro-telemetry</li>
+<li>gpmf-extract</li>
+<li>fs</li>
+<li>fast-csv</li>
+</ul>
+<h2 id="exiftool">ExifTool</h2>
+<p>Installation information: https://exiftool.org/install.html</p>
+<h2 id="ffmpeg">FFmpeg</h2>
+<p>Installation information: https://www.ffmpeg.org/download.html </p>
+<h1 id="getting-started">Getting started</h1>
+<p>GFAM needs video inputs and a JSON settings file to run.</p>
+<h2 id="video-inputs">Video inputs</h2>
+<p>GFAM has been tested on a HERO9 Black camera. Videos are assumed to be in .MP4 format. You can submit a single .MP4 file or a directory path that contains multiple .MP4 files.</p>
+<h2 id="settings">Settings</h2>
+<p>You can use this template to configure the JSON settings.</p>
+<pre><code>{
+    &quot;input_vid&quot;:&quot;/path/to/video&quot;,
+    &quot;project_dir&quot;: &quot;/path/to/output&quot;,
+    &quot;nth_frame&quot;: 30,
+    &quot;js_path&quot;: &quot;/go_forth_and_measure/supplementary_files/telemetry_extraction_hero9.js&quot;,
+    &quot;rescale_z&quot;: true,
+    &quot;min_z&quot;: none,
+    &quot;max_z&quot;: none,
+    &quot;ori&quot;: true,
+    &quot;sfm&quot;: &quot;RC&quot;,
+    &quot;prefix&quot;: &quot;&quot;,
+    &quot;north_hem&quot;: true,
+    &quot;west_hem&quot;: true,
+    &quot;clean_up&quot;: true,
+    &quot;config_file&quot;: &quot;/go_forth_and_measure/supplementary_files/pix4d.config&quot;
+}
 </code></pre>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>Stashed changes</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<h3 id="input_vid">input_vid</h3>
+<p>Filepath to video(s) input.</p>
+<h3 id="project_dir">project_dir</h3>
+<p>Filepath for GFAM outputs. GFAM will make this directory. If you pass a non-empty directory, GFAM will error out.</p>
+<h3 id="nth_frame">nth_frame</h3>
+<p>GFAM will extract every nth frame from the video. i.e. if your video was recorded at 30 FPS and you select<code>nth_frame=30</code>, GFAM will extract 1 frame per second. </p>
+<h3 id="js_path">js_path</h3>
+<p>The available GoPro telemetry streams, as well as their formatting and axes conventions, can change between cameras. If you have a different camera, you can use this as a starting point and consult the <a href="https://github.com/gopro/gpmf-parser">GoPro gpmf-parser GitHub</a> to make the appropriate modifications.</p>
+<h3 id="rescale_z-min_z-max_z">rescale_z, min_z, max_z</h3>
+<p>I have found that the z-axis from the GPS can be quite noisy. If you enable this option GFAM will rescale the z values to be more consistent. If you pass values for <code>min_z</code> and <code>max_z</code> all GPS values will be rescaled to that range. If you don't include those, it will simply all z levels with the mean. I recommend this for relatively flat areas where the elevation change is less than the noise in the GPS.</p>
+<h3 id="ori">ori</h3>
+<p>If you enable this, GFAM will include the orientation data and format it for the corresponding SfM software. The HERO9 Black does not have a magnetometer, so this telemetry is not as useful as it otherwise would be. When exporting for Pix4D, it will apply roll, pitch, and yaw as extra tags (this requires the config file). The yaw will be relative to the video beginning, not to true north. You can mitigate this by looking directly north when you begin filming, but you won't be able to account for sensor drift over time. When exporting for RealityCapture, it will create a gravity .xmp file for each image that is used to orient the roll and pitch of images.</p>
+<h3 id="sfm">sfm</h3>
+<p>You can select Pix4D (requires config file) or RealityCapture. If you want to modify this for a different software, you may have to write your own .config file. The orientation axes and metadata tags will be important.</p>
+<h3 id="prefix">prefix</h3>
+<p>You can provide a prefix for images.</p>
+<h3 id="north_hem-west_hem">north_hem, west_hem</h3>
+<p>These are used by ExifTool to write the GPS tags. The default values are True for both. Setting them to False switches to the other hemisphere.</p>
+<h3 id="clean_up">clean_up</h3>
+<p>This is an option to clean up the intermediate outputs created by GFAM and to organize multiple videos into a single directory. I recommend leaving this on for almost all scenarios, however it can be helpful to disable it during troubleshooting.</p>
+<h3 id="config_file">config_file</h3>
+<p>Non-standard Exif tags will require a .config file. </p>
+<h2 id="running-gfam">Running GFAM</h2>
+<h3 id="command-line">Command Line</h3>
+<p>You can run GFAM from the CLI by running <code>python3 gfam_exec.py -i /path/to/settings.json</code>. This is useful for programmatically processing many videos.</p>
+<h3 id="gui">GUI</h3>
+<p>You can run GFAM from a GUI by runnning <code>python3 gfam_gui.py</code>. This will allow you to load, createm and save new JSON files. You can also run them from the GUI, which will run <code>gfam_exec.py</code> in the background. I recommend this as a good starting place, especially if you're just processing one or two videos.</p>
 
 
 
