@@ -1,0 +1,16 @@
+site_name: Go Forth and Measure
+
+theme:
+  name: material
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [code]  # Points directly to your code directory
+          options:
+            docstring_style: sphinx  # Adjust based on your docstring format
+
+nav:
+  - Home: index.md
+  - API Reference: api.md
