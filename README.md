@@ -1,5 +1,5 @@
-This is some code that turns GoPro videos into images with the appropriate tags for structure from motion software. It can export images for Pix4D and RealityCapture. 
-[![IGARSS 2023 Pix4D - Plot](https://sketchfab.com/models/47c6adf0fc1c40c0926b61d8545163ec/thumbnail.jpg)](https://sketchfab.com/3d-models/igarss-2023-pix4d-plot-47c6adf0fc1c40c0926b61d8545163ec)
+This is some code that turns GoPro videos into images with the appropriate tags for structure from motion software. It can export images for Pix4D and RealityCapture.
+
 GFAM uses a JSON file to read the desired settings. Here is an example template: 
 ```
 {
