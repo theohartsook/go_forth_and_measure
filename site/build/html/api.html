@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>api package &mdash; Go forth and measure 0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Example" href="example.html" />
+    <link rel="prev" title="Introduction" href="intro.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Go forth and measure
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">api package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.apply_tags_hero9">api.apply_tags_hero9 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.frame_extraction">api.frame_extraction module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.gfam_exec">api.gfam_exec module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.project_management">api.project_management module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.telemetry_cleaning_hero9">api.telemetry_cleaning_hero9 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.telemetry_filters">api.telemetry_filters module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api.validation">api.validation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-api">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">api</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">api package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.apply_tags_hero9">api.apply_tags_hero9 module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.frame_extraction">api.frame_extraction module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.gfam_exec">api.gfam_exec module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.project_management">api.project_management module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.telemetry_cleaning_hero9">api.telemetry_cleaning_hero9 module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.telemetry_filters">api.telemetry_filters module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api.validation">api.validation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-api">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Go forth and measure</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">api package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-package">
+<h1>api package<a class="headerlink" href="#api-package" title="Permalink to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-api.apply_tags_hero9">
+<span id="api-apply-tags-hero9-module"></span><h2>api.apply_tags_hero9 module<a class="headerlink" href="#module-api.apply_tags_hero9" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.apply_tags_hero9.applyTags">
+<span class="sig-prename descclassname"><span class="pre">api.apply_tags_hero9.</span></span><span class="sig-name descname"><span class="pre">applyTags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">telem_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nth_frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imu_tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_ending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.jpg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">west_hem</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.apply_tags_hero9.applyTags" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.apply_tags_hero9.findClosestCTS">
+<span class="sig-prename descclassname"><span class="pre">api.apply_tags_hero9.</span></span><span class="sig-name descname"><span class="pre">findClosestCTS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cts_list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.apply_tags_hero9.findClosestCTS" title="Permalink to this definition"></a></dt>
+<dd><p>Uses bisection search to find the nearest neighbor for a CTS.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cts</strong> (<em>int</em>) – The camera time (ms) to match.</p></li>
+<li><p><strong>cts_list</strong> (<em>list of ints</em>) – A list of all CTS</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the matched cts.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-api.frame_extraction">
+<span id="api-frame-extraction-module"></span><h2>api.frame_extraction module<a class="headerlink" href="#module-api.frame_extraction" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.frame_extraction.extractFPS">
+<span class="sig-prename descclassname"><span class="pre">api.frame_extraction.</span></span><span class="sig-name descname"><span class="pre">extractFPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_video</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.frame_extraction.extractFPS" title="Permalink to this definition"></a></dt>
+<dd><p>Wrapper for ffmpeg to get the true FPS of a video.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_video</strong> (<em>str</em>) – Filepath to the target video</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns the FPS of the input video.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.frame_extraction.extractNthFrames">
+<span class="sig-prename descclassname"><span class="pre">api.frame_extraction.</span></span><span class="sig-name descname"><span class="pre">extractNthFrames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_video</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'frame_'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sig_fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_ending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.jpg'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.frame_extraction.extractNthFrames" title="Permalink to this definition"></a></dt>
+<dd><p>Extracts nth frames from a video using ffmpeg.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_video</strong> (<em>str</em>) – Filepath to the target video</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – Filepath to the directory where the tagged frames will be stored.</p></li>
+<li><p><strong>nth</strong> (<em>int</em>) – Controls how many frames are selected, defaults to 15</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – Prefix for the extracted frames, defaults to <code class="docutils literal notranslate"><span class="pre">'frame_'</span></code></p></li>
+<li><p><strong>sig_fig</strong> (<em>int</em>) – Controls the length of the frame IDs, defaults to 7 (i.e. 0000001-9999999)</p></li>
+<li><p><strong>file_ending</strong> (<em>str</em>) – Sets the frame output format, defaults to ‘.jpg’</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.frame_extraction.extractVideoStartTime">
+<span class="sig-prename descclassname"><span class="pre">api.frame_extraction.</span></span><span class="sig-name descname"><span class="pre">extractVideoStartTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_video</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.frame_extraction.extractVideoStartTime" title="Permalink to this definition"></a></dt>
+<dd><p>Function to extract video start time courtesy of <a class="reference external" href="https://video.stackexchange.com/questions/33551/get-metadata-for-video-start-time-with-ffmpeg">https://video.stackexchange.com/questions/33551/get-metadata-for-video-start-time-with-ffmpeg</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_video</strong> (<em>str</em>) – Filepath to the target video</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns the start time of the input video, or None if unavailable</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-api.gfam_exec">
+<span id="api-gfam-exec-module"></span><h2>api.gfam_exec module<a class="headerlink" href="#module-api.gfam_exec" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.gfam_exec.main">
+<span class="sig-prename descclassname"><span class="pre">api.gfam_exec.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.gfam_exec.main" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-api.project_management">
+<span id="api-project-management-module"></span><h2>api.project_management module<a class="headerlink" href="#module-api.project_management" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.project_management.createProjectDirectory">
+<span class="sig-prename descclassname"><span class="pre">api.project_management.</span></span><span class="sig-name descname"><span class="pre">createProjectDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.project_management.createProjectDirectory" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the frames and telemetry subdirectories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_dir</strong> (<em>str</em>) – filepath to project_dir</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns filepaths to frame_dir and telem_dir, else terminates</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.project_management.generateDefaultPrefix">
+<span class="sig-prename descclassname"><span class="pre">api.project_management.</span></span><span class="sig-name descname"><span class="pre">generateDefaultPrefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.project_management.generateDefaultPrefix" title="Permalink to this definition"></a></dt>
+<dd><p>Generates a default prefix using the video name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>input_vid</strong> (<em>str</em>) – Filepath to input video</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>frame prefix</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.project_management.importJSON">
+<span class="sig-prename descclassname"><span class="pre">api.project_management.</span></span><span class="sig-name descname"><span class="pre">importJSON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.project_management.importJSON" title="Permalink to this definition"></a></dt>
+<dd><p>Imports a user-supplied JSON.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>json_path</strong> (<em>str</em>) – filepath to JSON file</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns settings</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.project_management.processDirectory">
+<span class="sig-prename descclassname"><span class="pre">api.project_management.</span></span><span class="sig-name descname"><span class="pre">processDirectory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.project_management.processDirectory" title="Permalink to this definition"></a></dt>
+<dd><p>Runs processVideo() on all videos in a directory using JSON settings.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.project_management.processTelemetry">
+<span class="sig-prename descclassname"><span class="pre">api.project_management.</span></span><span class="sig-name descname"><span class="pre">processTelemetry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">telem_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">js_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.project_management.processTelemetry" title="Permalink to this definition"></a></dt>
+<dd><p>Extracts telemetry from video metadata using JS and gpmf-parser, then cleans the files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_vid</strong> (<em>str</em>) – filepath to input_vod provided by user</p></li>
+<li><p><strong>telem_dir</strong> (<em>str</em>) – filepath to telem_dir produced by createProjectDirectory()</p></li>
+<li><p><strong>js_path</strong> (<em>str</em>) – Filepath to the JS script</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.project_management.processVideo">
+<span class="sig-prename descclassname"><span class="pre">api.project_management.</span></span><span class="sig-name descname"><span class="pre">processVideo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.project_management.processVideo" title="Permalink to this definition"></a></dt>
+<dd><p>Processes an individual video using JSON settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – Settings import from user-supplied JSON file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 after processing is complete</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.project_management.tagFrames">
+<span class="sig-prename descclassname"><span class="pre">api.project_management.</span></span><span class="sig-name descname"><span class="pre">tagFrames</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frame_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">telem_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nth_frame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_vid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gps_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imu_tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.project_management.tagFrames" title="Permalink to this definition"></a></dt>
+<dd><p>Tags frames using exiftool</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frame_dir</strong> (<em>str</em>) – filepath frame_dir produced by createProjectDirectory()</p></li>
+<li><p><strong>telem_dir</strong> (<em>str</em>) – filepath to telem_dir produced by createProjectDirectory()</p></li>
+<li><p><strong>nth_frame</strong> (<em>int</em>) – nth_frame in user-supplied settings</p></li>
+<li><p><strong>input_vid</strong> (<em>str</em>) – input_vid in user-supplied settings</p></li>
+<li><p><strong>gps_tag</strong> (<em>bool</em>) – gps_tag in user-supplied settings</p></li>
+<li><p><strong>imu_tag</strong> (<em>bool</em>) – imu_tag in user-supplied settings</p></li>
+<li><p><strong>config_file</strong> (<em>str</em>) – config_file in user-supplied settings</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if successful</p>
+</dd>
+<dt class="field-odd">Rype<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-api.telemetry_cleaning_hero9">
+<span id="api-telemetry-cleaning-hero9-module"></span><h2>api.telemetry_cleaning_hero9 module<a class="headerlink" href="#module-api.telemetry_cleaning_hero9" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.cleanACCL">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">cleanACCL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accl_csv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.cleanACCL" title="Permalink to this definition"></a></dt>
+<dd><p>Reformats the JS extraction outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>accl_csv</strong> (<em>str</em>) – Filepath to the ACCL output from nodeWrapper()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.cleanCORI">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">cleanCORI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cori_csv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.cleanCORI" title="Permalink to this definition"></a></dt>
+<dd><p>Reformats the JS extraction outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cori_csv</strong> (<em>str</em>) – Filepath to the CORI output from nodeWrapper()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.cleanGPS">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">cleanGPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gps_csv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.cleanGPS" title="Permalink to this definition"></a></dt>
+<dd><p>Reformats the JS extraction outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gps_csv</strong> – Filepath to the GPS output from nodeWrapper()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.cleanGRAV">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">cleanGRAV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grav_csv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.cleanGRAV" title="Permalink to this definition"></a></dt>
+<dd><p>Reformats the JS extraction outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>grav_csv</strong> (<em>str</em>) – Filpath to the GRAV output from nodeWrapper()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.cleanGYRO">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">cleanGYRO</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gyro_csv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.cleanGYRO" title="Permalink to this definition"></a></dt>
+<dd><p>Reformats the JS extraction outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>gyro_csv</strong> (<em>str</em>) – Filepath to the GYRO output from nodeWrapper()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.cleanHERO9">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">cleanHERO9</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">telem_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.cleanHERO9" title="Permalink to this definition"></a></dt>
+<dd><p>Wrapper to clean all HERO9 telemtry streams</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>telem_dir</strong> (<em>str</em>) – telem_dir produced by createProjectDirectory()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.cleanIORI">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">cleanIORI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iori_csv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.cleanIORI" title="Permalink to this definition"></a></dt>
+<dd><p>Reformats the JS extraction outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iori_csv</strong> (<em>str</em>) – Filepath to the IORI output from nodeWrapper()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.convertGPSTimeForEXIFTool">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">convertGPSTimeForEXIFTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.convertGPSTimeForEXIFTool" title="Permalink to this definition"></a></dt>
+<dd><p>Converts GPS time for use with exiftool (strips time zone)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>date_str</strong> (<em>str</em>) – Date time str provided by gpfm-parser</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns reformated string if successful, else None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_cleaning_hero9.nodeWrapperHERO9">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_cleaning_hero9.</span></span><span class="sig-name descname"><span class="pre">nodeWrapperHERO9</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_video</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_gps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_accl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_gyro</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_grav</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_cori</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_iori</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">js_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_cleaning_hero9.nodeWrapperHERO9" title="Permalink to this definition"></a></dt>
+<dd><p>Wrapper to call JS script. Terminates if GPS is not saved successfully, otherwise warns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_video</strong> (<em>str</em>) – Filepath to the target video</p></li>
+<li><p><strong>output_gps</strong> (<em>str</em>) – Filepath where GPS stream will be saved.</p></li>
+<li><p><strong>output_accl</strong> (<em>str</em>) – Filepath where ACCL stream will be saved.</p></li>
+<li><p><strong>output_gyro</strong> (<em>str</em>) – Filepath where GYRO stream will be saved.</p></li>
+<li><p><strong>output_grav</strong> (<em>str</em>) – Filepath where GRAV stream will be saved.</p></li>
+<li><p><strong>output_cori</strong> (<em>str</em>) – Filepath where CORI stream will be saved.</p></li>
+<li><p><strong>output_iori</strong> (<em>str</em>) – Filepath where IORI stream will be saved.</p></li>
+<li><p><strong>js_path</strong> (<em>str</em>) – Filepath to the JS script.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if successful, terminates if GPS steam not saveed.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-api.telemetry_filters">
+<span id="api-telemetry-filters-module"></span><h2>api.telemetry_filters module<a class="headerlink" href="#module-api.telemetry_filters" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_filters.convertIORItoEuler">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_filters.</span></span><span class="sig-name descname"><span class="pre">convertIORItoEuler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iori_df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_filters.convertIORItoEuler" title="Permalink to this definition"></a></dt>
+<dd><p>Adds roll, pitch, and yaw to iori_df for alternative orientation measure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>iori_df</strong> (<em>pandas df</em>) – produced by CleanIORI()</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns updated iori_df</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas df</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.telemetry_filters.quaternionToEuler">
+<span class="sig-prename descclassname"><span class="pre">api.telemetry_filters.</span></span><span class="sig-name descname"><span class="pre">quaternionToEuler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">human_perspective</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.telemetry_filters.quaternionToEuler" title="Permalink to this definition"></a></dt>
+<dd><p>Converts quaternion into Euler angles.
+roll is rotation around x axis (+north, -south)
+pitch is rotation around y axis (+east, -west)
+and yaw is rotation around z axis (+down, -up).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>w</strong> (<em>float</em>) – Quaternion component</p></li>
+<li><p><strong>x</strong> – Quaternion component</p></li>
+<li><p><strong>y</strong> – Quaternion component</p></li>
+<li><p><strong>z</strong> – Quaternion component</p></li>
+<li><p><strong>human_perspective</strong> (<em>bool</em>) – Rotates yaw forward 90 degrees, defaults to True</p></li>
+</ul>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>roll, pitch, yaw</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float, float, float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-api.validation">
+<span id="api-validation-module"></span><h2>api.validation module<a class="headerlink" href="#module-api.validation" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="api.validation.validateArguments">
+<span class="sig-prename descclassname"><span class="pre">api.validation.</span></span><span class="sig-name descname"><span class="pre">validateArguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.validation.validateArguments" title="Permalink to this definition"></a></dt>
+<dd><p>Wrapper function to validate all data imported with importJSON().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – Settings import from user-supplied JSON file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns data with optional arguments supplied</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.validation.validateConfigFile">
+<span class="sig-prename descclassname"><span class="pre">api.validation.</span></span><span class="sig-name descname"><span class="pre">validateConfigFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.validation.validateConfigFile" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that the supplied config_file 1) exists 2) is a .config</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>config_file</strong> (<em>str</em>) – Filepath to config_file in JSON settings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if config file passes, else terminates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.validation.validateInputVid">
+<span class="sig-prename descclassname"><span class="pre">api.validation.</span></span><span class="sig-name descname"><span class="pre">validateInputVid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_vid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_ending</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.MP4'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.validation.validateInputVid" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that the input video 1) exists 2) is the correct format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_vid</strong> (<em>str</em>) – Filepath to input_vid in JSON settings.</p></li>
+<li><p><strong>file_ending</strong> (<em>str</em>) – File format of the input video, defaults to .MP4</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if video passed, else terminates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.validation.validateJSON">
+<span class="sig-prename descclassname"><span class="pre">api.validation.</span></span><span class="sig-name descname"><span class="pre">validateJSON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.validation.validateJSON" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that JSON file has all necessary arguments and supplies necessary default arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>dict</em>) – Settings imported from user-supplied JSON file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns data if all mandatory arguments included, else terminates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.validation.validateJSPath">
+<span class="sig-prename descclassname"><span class="pre">api.validation.</span></span><span class="sig-name descname"><span class="pre">validateJSPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">js_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.validation.validateJSPath" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that the JavaScript path 1) exists 2) is a .js</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>js_path</strong> (<em>str</em>) – Filepath to js_path in JSON settings.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if JS path passed, else terminates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="api.validation.validateProjectDir">
+<span class="sig-prename descclassname"><span class="pre">api.validation.</span></span><span class="sig-name descname"><span class="pre">validateProjectDir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.validation.validateProjectDir" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that project dir 1) does not already exist 2) makes directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_dir</strong> (<em>str</em>) – Filepath to project_dir</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>returns 0 if project_dir successfully made, else terminates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-api">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-api" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral float-right" title="Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Theo Hartsook.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
